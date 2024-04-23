@@ -2,10 +2,14 @@
 import numpy as np
 import tensorflow as tf 
 import pandas as pd
+
+# load model function 
 def load_model(model_dir): 
     model = tf.keras.models.load_model(model_dir)
     return model
 
+
+# gett the prediction
 def prediction_for_spesific_user(model, df: pd.DataFrame): 
     # random user_id
     user_id = random.randint(a = 9999, b = 99999)
