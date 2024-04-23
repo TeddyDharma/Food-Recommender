@@ -2,6 +2,7 @@
 import numpy as np
 import tensorflow as tf 
 import pandas as pd
+import random
 
 # load model function 
 def load_model(model_dir): 
