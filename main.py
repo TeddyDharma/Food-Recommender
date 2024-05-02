@@ -8,9 +8,16 @@ import random
 def load_model(model_dir): 
     model = tf.keras.models.load_model(model_dir)
     return model
-
 def read_food_dataset(): 
     return pd.read_excel("./data/recommendartion_data/final_data.xlsx")
+
+def preproccess_image(image): 
+    image_read = tf.io.read_file(image)
+    img_decode =  tf.io.decode_jpg(image_read)
+    img_resize = tf.image.resize(img_decode, [224, 224])
+    return [img_resize]
+
+
 # gett the prediction
 def prediction_for_spesific_user(): 
     # random user_id
@@ -25,3 +32,13 @@ def prediction_for_spesific_user():
     # this will sort the ratings from higher to lower
     all_prediction = np.argsort(all_prediction)[::-1]
     return all_prediction 
+
+def classification_prediction(image): 
+    model= tf.keras.models.load_model("./classificaiton_model.h5")
+    img_pred = preproccess_image(image)
+    return np.argmax[model.predict(img_pred)]
+
+
+
+
+# model = 
