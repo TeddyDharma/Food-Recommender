@@ -24,7 +24,7 @@ with st.expander('About this app'):
 with st.sidebar:
  
     st.page_link("app.py", label="Home", icon="🏠")
-    # st.page_link("../front end/pages/recomendation_page.py", label="Recomendation", icon="1️⃣")
+    st.page_link("pages/recomendation_page.py", label="Recomendation", icon="1️⃣")
 
 
     
@@ -32,9 +32,7 @@ uploaded_file = st.file_uploader("Choose a file", type=['png', 'jpeg'])
 
 if uploaded_file is not None:
 
-
     # note : run using command streamlit run app.py --server.enableXsrfProtection false
-    
     bytes_data = uploaded_file.read()
     # Mengonversi ke objek gambar PIL
     image = Image.open(BytesIO(bytes_data))
@@ -42,8 +40,10 @@ if uploaded_file is not None:
     st.image(image)
 
     pred = classification_prediction(bytes_data)
-    nutritions = display_nutrition(pred)
+    nutritions, description= get_nutritions_and_descriptions(pred)
+    
     df  =  pd.DataFrame(np.expand_dims(nutritions, axis = 0), columns = ['Kalori (kcal)', 'Lemak', 'Karbohidrat', 'Protein', 'Kolesterol (mg)', 'Serat', 'Vitamin A (IU)', 'Vitamin E (mg)', 'Vitamin K (mcg)','Vitamin C (mg)', 'Natrium (mg)' ])
+    st.write_stream(stream_data(description, df))
     st.table(df)
 
 
