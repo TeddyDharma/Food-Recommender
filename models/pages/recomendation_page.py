@@ -27,7 +27,7 @@ for i in range(0, len(products), columns_per_row):
     for col, product in zip(cols, products[i:i + columns_per_row]):
         with col:
             st.image(
-            "https://www.sugarspicenmore.com/wp-content/uploads/2022/08/Nasi-Goreng-3-rotated.jpg", use_column_width=True)
+             'https://tse1.mm.bing.net/th/id/OIP.gFlPKt3BvMQlEpAwmwXC9wHaFj?pid=ImgDet', use_column_width=True)
             st.text(product["name"])
             st.text(product["price"])
             st.text(product["description"])
