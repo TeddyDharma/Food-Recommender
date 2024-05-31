@@ -8,3 +8,4 @@ To Do
 - [x] Scrapping images link for recommendation page
 - [x] Finalization for image classification features 
 - [x] Collect data for food descriptions
+- [ ] Final Testing
