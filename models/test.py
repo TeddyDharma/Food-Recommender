@@ -7,7 +7,13 @@ import json
 # df = display_nutrition(prd)
 # print(df)
 
-tst = prediction_for_spesific_user()
+tst = recommendation_for_spesific_user()
 # print(tst)
 
-print(json.loads(tst)['recommendation'][0]) 
+# print(json.loads(tst)['recommendation'][0]) 
+
+# print(json.loads(tst)['recommendation']) 
+
+image_links = read_image_link() 
+
+print(get_final_recomendation(tst, image_links))
