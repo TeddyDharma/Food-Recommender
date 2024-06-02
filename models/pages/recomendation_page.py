@@ -7,7 +7,7 @@ st.markdown("""
     <style>
     /* Mengubah alignment konten utama */
     .main > div {
-        max-width: 800px;
+        max-width: 900px;
         margin-left: 0; /* Align content to the left */
         padding-left: 50px; /* Adjust the left padding to your preference */
     }
@@ -32,26 +32,15 @@ for i in range(0, len(products), columns_per_row):
     cols = st.columns(columns_per_row, gap = "medium")
     for col, product in zip(cols, products[i:i + columns_per_row]):
         with col:
-            response = requests.get(product['image'], stream=True)
-            image = Image.open(response.raw)
-            resized_image = image.resize((200, 200) , Image.Resampling.NEAREST)  
-            st.image(
-                resized_image, use_column_width=True, caption=product["name"])
-            
-            st.text(product['protein'])
-            st.text(product['energi'])
-            st.text(product['karbohidrat'])
-            st.text(product['lemak'])
-
-            # next to do : setting buttion for more information
-#             if st.button("More", key=f"button_{product['name']}_{i}", type="primary"):
-#                 st.session_state.product_selected = product  # Simpan produk yang dipilih di session state
-#                 # st.write(f"More info about {product['name']}")
-     
-
-
-# if st.session_state.product_selected:
-#     product = st.session_state.product_selected
-#     st.write(f"Nutrition information for {product['name']}:")
-#     # st.write(product['nutrition'])
-
+            with st.container():
+                response = requests.get(product['image'], stream=True)
+                image = Image.open(response.raw)
+                resized_image = image.resize((200, 200), Image.Resampling.NEAREST)
+           
+                st.image(resized_image, use_column_width=True)
+                st.text(f"Protein: {product['protein']} g")
+                st.text(f"Energi: {product['energi']} g")
+                st.text(f"Karbohidrat: {product['karbohidrat']} g")
+                st.text(f"Lemak: {product['lemak']} g")
+                st.caption(product["name"])
+ 
