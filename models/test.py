@@ -8,12 +8,11 @@ import json
 # print(df)
 
 tst = recommendation_for_spesific_user()
+print(tst)
 # print(tst)
 
-# print(json.loads(tst)['recommendation'][0]) 
-
-# print(json.loads(tst)['recommendation']) 
 
 image_links = read_image_link() 
 
-print(get_final_recomendation(tst, image_links))
+tst = get_final_recomendation(tst, image_links)
+print(tst[2]['image'])

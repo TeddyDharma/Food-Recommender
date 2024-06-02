@@ -25,10 +25,14 @@ tst = recommendation_for_spesific_user()
 
 image_links = read_image_link() 
 products = get_final_recomendation(tst, image_links)
-
+product_selected = ""
 columns_per_row = 4
+display = False
+if 'product_selected' not in st.session_state:
+    st.session_state.product_selected = None
 
 # Loop through products and display them in rows of 5 columns
+iter = 0
 for i in range(0, len(products), columns_per_row):
     cols = st.columns(columns_per_row, gap = "medium")
     for col, product in zip(cols, products[i:i + columns_per_row]):
@@ -38,7 +42,16 @@ for i in range(0, len(products), columns_per_row):
             resized_image = image.resize((200, 200) , Image.Resampling.NEAREST)  
             st.image(
                 resized_image, use_column_width=True, caption=product["name"])
+            iter+= 1
+            # next to do : setting buttion for more information
+#             if st.button("More", key=f"button_{product['name']}_{i}", type="primary"):
+#                 st.session_state.product_selected = product  # Simpan produk yang dipilih di session state
+#                 # st.write(f"More info about {product['name']}")
      
-# To run this, save it in a file (e.g., `
 
+
+# if st.session_state.product_selected:
+#     product = st.session_state.product_selected
+#     st.write(f"Nutrition information for {product['name']}:")
+#     # st.write(product['nutrition'])
 

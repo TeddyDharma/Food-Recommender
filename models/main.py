@@ -165,6 +165,8 @@ def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame
         data_per_product["name"] = recommendation_json_load[idx]
         data_per_product["price"] = "$10"
         data_per_product['description'] = f'This is {recommendation_json_load[idx]}'
+
+
         for food_idx in range(data_image_link.shape[0]):
             if str(recommendation_json_load[idx]).lower() in  str(data_image_link.loc[food_idx, "nama_makaan"]).lower(): 
                 data_per_product['image'] =  data_image_link.loc[food_idx, "gambar"]

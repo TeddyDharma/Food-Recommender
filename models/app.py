@@ -24,7 +24,7 @@ with st.expander('About this app'):
 with st.sidebar:
  
     st.page_link("app.py", label="Home", icon="🏠")
-    st.page_link("pages/recomendation_page.py", label="Recomendation", icon="1️⃣")
+    st.page_link("pages/recomendation_page.py", label="Recomendation", icon="🍔")
 
 
     
