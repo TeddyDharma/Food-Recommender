@@ -130,7 +130,7 @@ def stream_data(description : str, nutritions_pd :  pd.DataFrame):
 
 
 def read_image_link(): 
-    data_image_link  = pd.read_excel("../data/recommendartion_data/food_image_links_fix.xlsx")
+    data_image_link  = pd.read_excel("../data/recommendartion_data/finalIndonesia_data2.xlsx")
     data_image_link.drop(data_image_link.columns[data_image_link.columns.str.contains('unnamed', case=False)], axis=1, inplace=True)
     return data_image_link
 
@@ -157,6 +157,7 @@ def recommendation_for_spesific_user():
     return json.dumps(recommendation)
 
 def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame): 
+    
     products = []
     data_per_product = {}
     recommendation_json_load = json.loads(recommendations_json)['recommendation']
@@ -169,8 +170,14 @@ def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame
 
         for food_idx in range(data_image_link.shape[0]):
             if str(recommendation_json_load[idx]).lower() in  str(data_image_link.loc[food_idx, "nama_makaan"]).lower(): 
+                split_nutritions = data_image_link.loc[food_idx, "nutritions"].split(",")
                 data_per_product['image'] =  data_image_link.loc[food_idx, "gambar"]
+                data_per_product['protein'] = split_nutritions[0]
+                data_per_product['energi'] =  split_nutritions[1]
+                data_per_product['karbohidrat'] = split_nutritions[2]
+                data_per_product['lemak'] = split_nutritions[3]
                 iter += 1
+
         products.append(data_per_product)
         data_per_product = {}
 
