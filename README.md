@@ -10,5 +10,5 @@ To Do
 - [x] Collect data for food descriptions
 - [x] Collect image link for food recommendation
 - [x] Display food nutritions and markdown
-- [ ] Chatbot feature
-- [ ] Final Testing
+- [x] Chatbot feature
+- [x] Final Testing
