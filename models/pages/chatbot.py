@@ -1,33 +1,43 @@
-from openai import OpenAI
+from langchain.llms import GooglePalm 
 import streamlit as st
+import time
 
-st.header("NutriMate Chat", divider = "gray")
+
+def load_model_GooglePalm():
+    try:
+        api_key = "AIzaSyDc9dLSWX0jerFioIn3OoYPaXpxi0qsNKY"
+        llm_model = GooglePalm(google_api_key=api_key, temperature=0.9)
+        return llm_model
+    except NotImplementedError as e:
+        raise e
+    
+
+def generate_answear(llm_model, question): 
+    poem = llm_model(question)
+    return poem
+
+def stream_data(answear):
+    for word in answear.split(" "):
+        yield word + " "
+        time.sleep(0.02)
+
+st.title("NutriMate Chat")
+
+client = load_model_GooglePalm()
+
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Hai selamat datang di NutriChat, ada yang bisa saya bantu ?"}]
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [{"role": "assistant", "content": "Hai welcome to NutriMate Chat, what can i do for you ? 😊"}]
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("Your message"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        stream = client.chat.completions.create(
-            model=st.session_state["openai_model"],
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
-        )
-        response = st.write_stream(stream)
+        stream =  generate_answear(client,  prompt)
+        response = st.write_stream(stream_data(stream))
     st.session_state.messages.append({"role": "assistant", "content": response})
