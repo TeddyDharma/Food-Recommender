@@ -176,8 +176,6 @@ def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame
                 data_per_product['energi'] =  split_nutritions[1]
                 data_per_product['karbohidrat'] = split_nutritions[2]
                 data_per_product['lemak'] = split_nutritions[3]
-
-                # print(f'value : {split_nutritions[0]} ')
                 if  float(f'{split_nutritions[0]}') > 300.0: 
                     data_per_product['high_protein'] = True 
                 else: 

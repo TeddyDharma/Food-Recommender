@@ -49,11 +49,5 @@ for i in range(0, len(products), columns_per_row):
                     st.markdown(f':green-background[High Energy]')
                 if  product['high_lemak'] == True: 
                     st.markdown(f':red-background[High Fat]')
-                
-                # st.markdown(f':blue-background[High Protein]')
-                # st.markdown(f':green-background[High Energy]')
-
-               
-
                 st.caption(product["name"])
              
