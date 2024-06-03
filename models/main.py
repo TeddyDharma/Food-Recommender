@@ -176,12 +176,23 @@ def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame
                 data_per_product['energi'] =  split_nutritions[1]
                 data_per_product['karbohidrat'] = split_nutritions[2]
                 data_per_product['lemak'] = split_nutritions[3]
+
+                # print(f'value : {split_nutritions[0]} ')
+                if  float(f'{split_nutritions[0]}') > 300.0: 
+                    data_per_product['high_protein'] = True 
+                else: 
+                    data_per_product['high_protein'] = False
+                if  float(f'{split_nutritions[1]}') > 300.0: 
+                    data_per_product['high_energi'] = True 
+                else: 
+                    data_per_product['high_energi'] = False
+                if  float( f'{split_nutritions[2]}') > 300.0: 
+                    data_per_product['high_lemak'] = True 
+                else: 
+                    data_per_product['high_lemak'] = False
                 iter += 1
 
         products.append(data_per_product)
         data_per_product = {}
 
     return products
-
-
-# model = 
