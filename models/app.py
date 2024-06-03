@@ -25,6 +25,8 @@ with st.sidebar:
  
     st.page_link("app.py", label="Home", icon="🏠")
     st.page_link("pages/recomendation_page.py", label="Recomendation", icon="🍔")
+    st.page_link("pages/chatbot.py", label="NutriChat", icon="🤖")
+
 
 
     
