@@ -18,7 +18,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.header("Best Indonesian Foods and Drinks For You !", divider = "gray")
+st.header("Best Indonesian Foods and Drinks For You ! 🍽️", divider = "gray")
 
 tst = recommendation_for_spesific_user()
 
