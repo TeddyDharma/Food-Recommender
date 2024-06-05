@@ -10,4 +10,6 @@ To Do
 - [x] Collect data for food descriptions
 - [x] Display food nutritions and markdown
 - [x] Chatbot feature
+- [ ] Model Deployment
+- [ ] Database and web hosting
 - [x] Final Testing
