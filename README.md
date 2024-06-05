@@ -12,4 +12,4 @@ To Do
 - [x] Chatbot feature
 - [ ] Model Deployment
 - [ ] Database and web hosting
-- [x] Final Testing
+- [ ] Final Testing
