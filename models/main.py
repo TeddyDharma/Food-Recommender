@@ -108,6 +108,16 @@ def classification_prediction(image):
     return json.dumps(pred)
 
 
+
+
+
+    
+def stream_data(description : str, nutritions_pd :  pd.DataFrame): 
+    for word in description.split(" "): 
+        yield word + " "
+        time.sleep(0.05)
+        nutritions_pd
+
 def get_nutritions_and_descriptions(model_prediction):
     json_load = json.loads(model_prediction)['prediction']
     print(str(json_load).lower())
@@ -118,16 +128,6 @@ def get_nutritions_and_descriptions(model_prediction):
             nutritions = df_nutrition.iloc[idx, 1:].to_list()
             descriptions  = df_description.loc[idx, "Description"]
     return nutritions, descriptions
-
-
-    
-def stream_data(description : str, nutritions_pd :  pd.DataFrame): 
-    for word in description.split(" "): 
-        yield word + " "
-        time.sleep(0.05)
-        nutritions_pd
-
-
 
 def read_image_link(): 
     data_image_link  = pd.read_excel("../data/recommendartion_data/finalIndonesia_data2.xlsx")
@@ -164,10 +164,6 @@ def get_final_recomendation(recommendations_json, data_image_link : pd.DataFrame
     iter = 1
     for idx, _ in enumerate(recommendation_json_load): 
         data_per_product["name"] = recommendation_json_load[idx]
-        data_per_product["price"] = "$10"
-        data_per_product['description'] = f'This is {recommendation_json_load[idx]}'
-
-
         for food_idx in range(data_image_link.shape[0]):
             if str(recommendation_json_load[idx]).lower() in  str(data_image_link.loc[food_idx, "nama_makaan"]).lower(): 
                 split_nutritions = data_image_link.loc[food_idx, "nutritions"].split(",")
